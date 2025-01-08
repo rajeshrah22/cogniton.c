@@ -1,15 +1,16 @@
 CC = gcc
 CFLAGS = -Wextra -Wall -Werror -Wpedantic
 
-test_deps = tensor.o test.o
-
 default: test
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $^
 
-test: $(test_deps)
+test: tensor.o test.o
+	$(CC) $(CFLAGS) -o $@ $^
+
+linear-reg: tensor.o linear-reg.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 clean:
-	rm -f *.o test
+	rm -f *.o test linear-reg
